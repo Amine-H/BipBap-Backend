@@ -12,6 +12,9 @@
 		<class>entities.Bilan</class>
 		<class>entities.BAP</class>
 		<class>entities.BIP</class>
+		<class>entities.Feedback</class>
+		<class>entities.Objectif</class>
+		<class>entities.BilanObjectif</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/suivicollabs" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

@@ -6,7 +6,7 @@ import entities.BIP;
 
 @Stateless
 @Path("/BIP")
-public class BIPREST extends AbstractREST<BIP>{
+public class BIPREST extends AbstractREST<BIP> {
 
 	public BIPREST() {
 		super(BIP.class);

@@ -18,9 +18,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Bilan.findAll", query = "SELECT b FROM Bilan b"),
-    @NamedQuery(name = "Bilan.findById", query = "SELECT b FROM Bilan b WHERE b.id = :id")})
+@NamedQueries({ @NamedQuery(name = "Bilan.findAll", query = "SELECT b FROM Bilan b"),
+		@NamedQuery(name = "Bilan.findById", query = "SELECT b FROM Bilan b WHERE b.id = :id"),
+		@NamedQuery(name = "Bilan.getForCollab", query = "SELECT b FROM Bilan b WHERE b.collaborateur.id = :collab") })
 public class Bilan implements Serializable {
 	private static final long serialVersionUID = -1027553204415003158L;
 	@Id
@@ -32,9 +32,27 @@ public class Bilan implements Serializable {
 	private Collaborateur collaborateur;
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private ManagerRH manager;
+	private String DTYPE;
+	protected float progression;
+
+	public float getProgression() {
+		return progression;
+	}
+
+	public void setProgression(float progression) {
+		this.progression = progression;
+	}
 
 	public long getId() {
 		return id;
+	}
+
+	public String getDTYPE() {
+		return DTYPE;
+	}
+
+	public void setDTYPE(String dTYPE) {
+		DTYPE = dTYPE;
 	}
 
 	public void setId(long id) {

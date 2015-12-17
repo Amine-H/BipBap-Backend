@@ -31,6 +31,7 @@ public class Utilisateur implements Serializable {
 	private String prenom;
 	private String email;
 	private String password;
+	private String DTYPE;
 	@Temporal(value = TemporalType.DATE)
 	private Date dateEmbauche;
 	private String matricule;
@@ -82,5 +83,11 @@ public class Utilisateur implements Serializable {
 	}
 	public void setPoste(String poste) {
 		this.poste = poste;
+	}
+	public String getDTYPE() {
+		return DTYPE;
+	}
+	public void setDTYPE(String dTYPE) {
+		DTYPE = dTYPE;
 	}
 }
