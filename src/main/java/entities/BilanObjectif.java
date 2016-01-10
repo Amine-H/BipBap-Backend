@@ -3,8 +3,12 @@ package entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -18,11 +22,15 @@ public class BilanObjectif implements Serializable {
 	private static final long serialVersionUID = 3583828327071081247L;
 	@Id
 	private long id;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "objectif_id")
 	private Objectif objectif;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "bilan_id")
 	private Bilan bilan;
 	private float resultat;
 	private float poids;
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST,mappedBy="objectif")
 	private List<Feedback> feedbacks;
 
 	public long getId() {

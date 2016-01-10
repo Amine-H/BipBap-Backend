@@ -3,10 +3,16 @@ package entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
@@ -17,11 +23,18 @@ public class Feedback implements Serializable{
 	private static final long serialVersionUID = -6920749212303590449L;
 	@Id
 	private long id;
-	private Utilisateur evaluateur;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "evaluateur_id")
+	private Evaluateur evaluateur;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name="bilanobjectif_id")
+	private BilanObjectif objectif;
 	private String poste;
 	private String codeProjet;
 	private String nomProjet;
+	@Temporal(value = TemporalType.DATE)
 	private Date dateDebut;
+	@Temporal(value = TemporalType.DATE)
 	private Date dateFin;
 	private String role;
 	private int nombreJours;
@@ -36,11 +49,11 @@ public class Feedback implements Serializable{
 		this.id = id;
 	}
 
-	public Utilisateur getEvaluateur() {
+	public Evaluateur getEvaluateur() {
 		return evaluateur;
 	}
 
-	public void setEvaluateur(Utilisateur evaluateur) {
+	public void setEvaluateur(Evaluateur evaluateur) {
 		this.evaluateur = evaluateur;
 	}
 
