@@ -18,15 +18,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @XmlRootElement
 @NamedQueries({ @NamedQuery(name = "Bilan.findAll", query = "SELECT b FROM Bilan b"),
 		@NamedQuery(name = "Bilan.findById", query = "SELECT b FROM Bilan b WHERE b.id = :id"),
-		@NamedQuery(name = "Bilan.getForCollab", query = "SELECT b FROM Bilan b WHERE b.collaborateur.id = :collab") })
-public class Bilan implements Serializable {
+		@NamedQuery(name = "Bilan.getForCollab", query = "SELECT b FROM Bilan b WHERE b.collaborateur.id = :collab"),
+		@NamedQuery(name = "Bilan.getObjectifs", query = "SELECT bo FROM BilanObjectif bo WHERE bo.bilan.id = :bilan")})
+public class Bilan implements Serializable, Identifiable {
 	private static final long serialVersionUID = -1027553204415003158L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,15 +35,14 @@ public class Bilan implements Serializable {
 	private Date dateCreation;
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "collaborateur_id")
-	@JsonBackReference
 	private Collaborateur collaborateur;
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "manager_id")
-	@JsonBackReference
 	private ManagerRH manager;
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST,mappedBy="bilan")
+	@JsonIgnore
 	private List<BilanObjectif> objectifs;
-	private String DTYPE;
+	private String dtype;
 	protected float progression;
 
 	public List<BilanObjectif> getObjectifs() {
@@ -66,12 +65,12 @@ public class Bilan implements Serializable {
 		return id;
 	}
 
-	public String getDTYPE() {
-		return DTYPE;
+	public String getdtype() {
+		return dtype;
 	}
 
-	public void setDTYPE(String dTYPE) {
-		DTYPE = dTYPE;
+	public void setdtype(String dtype) {
+		this.dtype = dtype;
 	}
 
 	public void setId(long id) {

@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import entities.Bilan;
+import entities.BilanObjectif;
 import listeners.LocalEntityManagerFactory;
 
 @Stateless
@@ -33,5 +34,20 @@ public class BilanREST extends AbstractREST<Bilan> {
 		bilans = query.getResultList();
 
 		return bilans;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Path("/{id}/objectif")
+	@GET
+	@Produces("application/json")
+	public List<BilanObjectif> getObjectifs(@PathParam("id") long id) {
+		EntityManager em = LocalEntityManagerFactory.createEntityManager();
+		List<BilanObjectif> objectifs = null;
+
+		Query query = em.createNamedQuery("Bilan.getObjectifs", BilanObjectif.class);
+		query.setParameter("bilan", id);
+		objectifs = query.getResultList();
+
+		return objectifs;
 	}
 }

@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({ @NamedQuery(name = "Feedback.findAll", query = "SELECT f FROM Feedback f"),
 		@NamedQuery(name = "Feedback.findById", query = "SELECT f FROM Feedback f WHERE f.id = :id") })
-public class Feedback implements Serializable{
+public class Feedback implements Serializable,Identifiable{
 	private static final long serialVersionUID = -6920749212303590449L;
 	@Id
 	private long id;

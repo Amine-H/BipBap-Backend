@@ -12,9 +12,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+
+import entities.Identifiable;
 import listeners.LocalEntityManagerFactory;
 
-public abstract class AbstractREST<T> {
+public abstract class AbstractREST<T extends Identifiable> {
 	private Class<T> entityClass;
 	private String entityName;
 	public AbstractREST(Class<T> entityClass){
@@ -69,6 +71,7 @@ public abstract class AbstractREST<T> {
 		EntityManager em = LocalEntityManagerFactory.createEntityManager();
 		try {
 			em.getTransaction().begin();
+			entity.setId(id);
 			em.merge(entity);
 			em.getTransaction().commit();
 		} finally {

@@ -9,7 +9,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.codehaus.jackson.annotate.JsonManagedReference;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @XmlRootElement
@@ -18,7 +19,7 @@ import org.codehaus.jackson.annotate.JsonManagedReference;
     @NamedQuery(name = "ManagerRH.findById", query = "SELECT u FROM ManagerRH u WHERE u.id = :id")})
 public class ManagerRH extends Utilisateur {
 	private static final long serialVersionUID = 3259601862182253323L;
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST,mappedBy="manager")
 	private Set<Bilan> bilans;
 

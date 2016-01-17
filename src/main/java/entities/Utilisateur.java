@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 	@NamedQuery(name = "Utilisateur.login", query = "SELECT u FROM Utilisateur u WHERE u.email = :email AND u.password = :password"),
     @NamedQuery(name = "Utilisateur.findAll", query = "SELECT u FROM Utilisateur u"),
     @NamedQuery(name = "Utilisateur.findById", query = "SELECT u FROM Utilisateur u WHERE u.id = :id")})
-public class Utilisateur implements Serializable {
+public class Utilisateur implements Serializable,Identifiable{
 	private static final long serialVersionUID = -5054129581423435016L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -31,7 +31,7 @@ public class Utilisateur implements Serializable {
 	private String prenom;
 	private String email;
 	private String password;
-	private String DTYPE;
+	private String dtype;
 	@Temporal(value = TemporalType.DATE)
 	private Date dateEmbauche;
 	private String matricule;
@@ -84,10 +84,10 @@ public class Utilisateur implements Serializable {
 	public void setPoste(String poste) {
 		this.poste = poste;
 	}
-	public String getDTYPE() {
-		return DTYPE;
+	public String getdtype() {
+		return dtype;
 	}
-	public void setDTYPE(String dTYPE) {
-		DTYPE = dTYPE;
+	public void setdtype(String dtype) {
+		this.dtype = dtype;
 	}
 }
