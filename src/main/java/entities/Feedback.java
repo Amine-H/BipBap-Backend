@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,9 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @XmlRootElement
@@ -40,6 +44,9 @@ public class Feedback implements Serializable,Identifiable{
 	private int nombreJours;
 	private String commentaire;
 	private boolean prive;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST,mappedBy="feedback")
+	@JsonIgnore
+	private List<Qualification> qualifications;
 
 	public long getId() {
 		return id;
@@ -127,5 +134,13 @@ public class Feedback implements Serializable,Identifiable{
 
 	public void setPrive(boolean prive) {
 		this.prive = prive;
+	}
+
+	public List<Qualification> getQualifications() {
+		return qualifications;
+	}
+
+	public void setQualifications(List<Qualification> qualifications) {
+		this.qualifications = qualifications;
 	}
 }
