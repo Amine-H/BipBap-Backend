@@ -5,12 +5,16 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @XmlRootElement
@@ -19,13 +23,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Qualification implements Serializable, Identifiable {
 	private static final long serialVersionUID = 3980681774958277995L;
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	private String theme;
-	private String qualification;
+	private int qualification;
 	private String remarque;
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name="feedback_id")
+	@JsonIgnore
 	private Feedback feedback;
+
+	public Feedback getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
+	}
 
 	@Override
 	public long getId() {
@@ -45,11 +59,11 @@ public class Qualification implements Serializable, Identifiable {
 		this.theme = theme;
 	}
 
-	public String getQualification() {
+	public int getQualification() {
 		return qualification;
 	}
 
-	public void setQualification(String qualification) {
+	public void setQualification(int qualification) {
 		this.qualification = qualification;
 	}
 

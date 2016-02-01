@@ -14,6 +14,9 @@ import entities.Bilan;
 import entities.BilanObjectif;
 import listeners.LocalEntityManagerFactory;
 
+/*
+ * Bilan Restful Resource
+ */
 @Stateless
 @Path("/Bilan")
 public class BilanREST extends AbstractREST<Bilan> {

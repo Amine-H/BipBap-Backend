@@ -11,6 +11,9 @@ import javax.ws.rs.Produces;
 import entities.Utilisateur;
 import listeners.LocalEntityManagerFactory;
 
+/*
+ * Utilisateur Restful Resource
+ */
 @Stateless
 @Path("/Utilisateur")
 public class UtilisateurREST extends AbstractREST<Utilisateur>{

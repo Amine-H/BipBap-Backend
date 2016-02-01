@@ -16,6 +16,9 @@ import javax.ws.rs.Produces;
 import entities.Identifiable;
 import listeners.LocalEntityManagerFactory;
 
+/*
+ * basic abstract Restful Resource
+ */
 public abstract class AbstractREST<T extends Identifiable> {
 	private Class<T> entityClass;
 	private String entityName;

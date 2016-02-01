@@ -13,6 +13,9 @@ import entities.BIP;
 import entities.BilanObjectif;
 import listeners.LocalEntityManagerFactory;
 
+/*
+ * BIP Restful Restful Resource
+ */
 @Stateless
 @Path("/BIP")
 public class BIPREST extends AbstractREST<BIP> {

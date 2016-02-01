@@ -7,6 +7,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+/**
+ * serves as a creator for the EntityManager
+ */
 @WebListener
 public class LocalEntityManagerFactory implements ServletContextListener {
 	private static EntityManagerFactory emf;

@@ -21,7 +21,9 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 @XmlRootElement
 @NamedQueries({ @NamedQuery(name = "BilanObjectif.findAll", query = "SELECT bo FROM BilanObjectif bo"),
-		@NamedQuery(name = "BilanObjectif.findById", query = "SELECT bo FROM BilanObjectif bo WHERE bo.id = :id") })
+		@NamedQuery(name = "BilanObjectif.findById", query = "SELECT bo FROM BilanObjectif bo WHERE bo.id = :id"),
+		@NamedQuery(name = "BilanObjectif.getFeedbacks", query = "SELECT f FROM BilanObjectif bo JOIN bo.feedbacks f WHERE bo.id = :id"),
+		@NamedQuery(name = "BilanObjectif.getCollaborator", query = "SELECT bo.bilan.collaborateur FROM BilanObjectif bo WHERE bo.id=:id")})
 public class BilanObjectif implements Serializable,Identifiable {
 	private static final long serialVersionUID = 3583828327071081247L;
 	@Id

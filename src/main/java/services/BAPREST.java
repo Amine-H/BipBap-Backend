@@ -14,6 +14,9 @@ import entities.BAP;
 import entities.BilanObjectif;
 import listeners.LocalEntityManagerFactory;
 
+/*
+ * BAP Restful Resource
+ */
 @Stateless
 @Path("/BAP")
 public class BAPREST extends AbstractREST<BAP> {

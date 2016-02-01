@@ -13,5 +13,7 @@
 		<servlet-name>ServletAdaptor</servlet-name>
 		<url-pattern>/ws/*</url-pattern>
 	</servlet-mapping>
-
+	<listener>
+		<listener-class>listeners.Listener</listener-class>
+	</listener>
 </web-app>

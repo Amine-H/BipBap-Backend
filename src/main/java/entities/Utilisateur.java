@@ -15,6 +15,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @XmlRootElement
@@ -64,7 +66,7 @@ public class Utilisateur implements Serializable,Identifiable{
 		return password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = DigestUtils.md5Hex(password);
 	}
 	public Date getDateEmbauche() {
 		return dateEmbauche;

@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,10 +24,13 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 @XmlRootElement
 @NamedQueries({ @NamedQuery(name = "Feedback.findAll", query = "SELECT f FROM Feedback f"),
-		@NamedQuery(name = "Feedback.findById", query = "SELECT f FROM Feedback f WHERE f.id = :id") })
+		@NamedQuery(name = "Feedback.findById", query = "SELECT f FROM Feedback f WHERE f.id = :id"),
+		@NamedQuery(name = "Feedback.getQualifications", query = "SELECT q FROM Feedback f JOIN f.qualifications q WHERE f.id=:id"),
+		@NamedQuery(name = "Feedback.getCollaborator", query = "SELECT f.objectif.bilan.collaborateur FROM Feedback f WHERE f.id=:id")})
 public class Feedback implements Serializable,Identifiable{
 	private static final long serialVersionUID = -6920749212303590449L;
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "evaluateur_id")
@@ -47,6 +52,20 @@ public class Feedback implements Serializable,Identifiable{
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST,mappedBy="feedback")
 	@JsonIgnore
 	private List<Qualification> qualifications;
+
+	/**
+	 * @return the objectif
+	 */
+	public BilanObjectif getObjectif() {
+		return objectif;
+	}
+
+	/**
+	 * @param objectif the objectif to set
+	 */
+	public void setObjectif(BilanObjectif objectif) {
+		this.objectif = objectif;
+	}
 
 	public long getId() {
 		return id;

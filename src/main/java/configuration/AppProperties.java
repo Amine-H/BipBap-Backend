@@ -6,6 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * handy class allowing me to easily get properties saved in a .properties file
+ * @author amine
+ *
+ */
 public class AppProperties {
 	private static volatile AppProperties instance;
 	private Properties properties;
@@ -37,7 +42,9 @@ public class AppProperties {
 			e.printStackTrace();
 		}
 	}
-	
+	public Properties getPropreties(){
+		return properties;
+	}
 	public String getProperty(String key){
 		return properties.getProperty(key);
 	}
